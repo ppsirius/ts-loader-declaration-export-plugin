@@ -1,17 +1,29 @@
+import { Compiler } from "webpack";
+import IOptions from "./IOptions";
+
 class DeclarationExportPlugin {
-  constructor(options = {}) {
+  constructor(options: IOptions) {
     console.log(options);
   }
 
-  apply(compiler) {
-    console.log(compiler, " compiler object");
-    compiler.hooks.done.tap("Hello World Plugin", (
-      stats /* stats is passed as an argument when done hook is tapped.  */
-    ) => {
-      console.log("Hello World!");
-      return "lol";
-    });
+  apply(compiler: Compiler) {
+    compiler.hooks.emit.tapAsync(
+      "DeclarationExportPlugin",
+      (compilation, callback) => {
+        const declarationFilesNames = Object.keys(compilation.assets).filter(
+          asset => {
+            if (asset.indexOf(".d.ts") !== -1) return asset;
+          }
+        );
+
+        console.log(declarationFilesNames);
+
+        callback();
+      }
+    );
   }
+
+  private generateDeclarations() {}
 }
 
 export default DeclarationExportPlugin;
