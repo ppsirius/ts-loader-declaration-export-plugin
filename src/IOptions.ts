@@ -1,4 +1,5 @@
 export default interface IOptions {
-  moduleName: string;
+  modulePath: string;
   output: string;
+  folderName: string;
 }
