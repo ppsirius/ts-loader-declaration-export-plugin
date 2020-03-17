@@ -16,15 +16,22 @@ class DeclarationExportPlugin {
     this.folderName = options.folderName;
   }
 
-  allDeclarationsName(assets: object): string[] {
+  static allDeclarationsName(assets: object): string[] {
     return Object.keys(assets).filter(asset => {
       if (asset.indexOf(".d.ts") !== -1) return asset;
     });
   }
 
-  filterDeclarationsName(declarations: string[]): string[] {
+  static filterDeclarationsName(
+    declarations: string[],
+    folderName: string,
+    modulePath: string
+  ): string[] {
     return declarations.filter(declaration => {
-      if (declaration.indexOf(`${this.folderName}/${this.modulePath}`) !== -1) {
+      console.log(declaration, " declaration");
+      console.log(`${folderName}/${modulePath}`);
+      if (declaration.indexOf(`${folderName}/${modulePath}`) !== -1) {
+        console.log(declaration, " declaration if");
         return declaration;
       }
     });
@@ -58,7 +65,7 @@ class DeclarationExportPlugin {
   };
 
   deleteDeclarationsAssets = (allAssets: { [key: string]: string }): void => {
-    this.allDeclarationsName(allAssets).forEach(asset => {
+    DeclarationExportPlugin.allDeclarationsName(allAssets).forEach(asset => {
       delete allAssets[asset];
     });
   };
@@ -67,8 +74,10 @@ class DeclarationExportPlugin {
     compiler.hooks.emit.tapAsync(
       "DeclarationExportPlugin",
       (compilation, callback) => {
-        const filteredDeclarations = this.filterDeclarationsName(
-          this.allDeclarationsName(compilation.assets)
+        const filteredDeclarations = DeclarationExportPlugin.filterDeclarationsName(
+          DeclarationExportPlugin.allDeclarationsName(compilation.assets),
+          this.folderName,
+          this.folderName
         );
 
         const generatedDeclarations = this.filterDeclarationsAssets(
