@@ -3,11 +3,13 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
+    "dev": "babel --watch src --out-dir dist --extensions '.ts,.tsx'",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --watch --source-maps inline"
+    "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
@@ -15,6 +17,13 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "typescript": "^3.7.5"
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.1",
+    "@types/webpack": "^4.41.7",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0"
   }
 }
