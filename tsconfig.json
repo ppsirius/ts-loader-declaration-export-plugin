@@ -2,13 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es2015"],
+    "lib": ["esnext"],
     "strict": true,
     "declaration": true,
     "outDir": "dist",
     "sourceMap": true,
-    "esModuleInterop": true,
-    "noImplicitAny": false
+    "esModuleInterop": true
+    // "noImplicitAny": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

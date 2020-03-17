@@ -30,11 +30,16 @@ class DeclarationExportPlugin {
     });
   }
 
+  generateAssetPath = (path: string): string => {
+    // const url = path.split("/");
+    return `/'${this.output}`;
+  };
+
   filterDeclarationsAssets = (
-    allAssets: [object],
+    allAssets: { [key: string]: string },
     filteredDeclarations: string[]
-  ): object => {
-    return Object.keys(allAssets)
+  ): object[] => {
+    const filteredAssets: object[] = Object.keys(allAssets)
       .filter(fileName => {
         for (const file of filteredDeclarations) {
           if (fileName.indexOf(file) !== -1) {
@@ -43,12 +48,19 @@ class DeclarationExportPlugin {
         }
       })
       .map(fileName => {
-        console.log(fileName, " ");
-
+        this.generateAssetPath(fileName);
         return {
-          [fileName]: allAssets[fileName] // @todo check this ts warning
+          [this.generateAssetPath(fileName)]: allAssets[fileName]
         };
       });
+
+    return filteredAssets;
+  };
+
+  deleteDeclarationsAssets = (allAssets: { [key: string]: string }): void => {
+    this.allDeclarationsName(allAssets).forEach(asset => {
+      delete allAssets[asset];
+    });
   };
 
   apply(compiler: Compiler) {
@@ -64,14 +76,19 @@ class DeclarationExportPlugin {
           filteredDeclarations
         );
 
-        console.log(generatedDeclarations, " decration assets ");
+        this.deleteDeclarationsAssets(compilation.assets);
+
+        compilation.assets = {
+          ...compilation.assets,
+          ...generatedDeclarations[0]
+        };
+        console.log(...generatedDeclarations, " decration assets ");
+        console.log(compilation.assets, " compilation.assets");
 
         callback();
       }
     );
   }
-
-  private generateDeclarations() {}
 }
 
 export default DeclarationExportPlugin;
