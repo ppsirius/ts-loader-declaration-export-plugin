@@ -1,7 +1,5 @@
 # ts-loader-declaration-export-plugin
 
-# Currently WIP!!!
-
 # What is this?
 
 This is a small webpack plugin to export only declaration files you choose. It's connected with ts-loader. So you install it first and then add "declaration": true in tsconfig.json.
@@ -30,10 +28,6 @@ module.exports = {
     new DeclarationExportPlugin({
       modulePath: 'src/index.d.ts',
       output: 'index.d.ts',
-      folderName: path
-        .resolve(__dirname, '')
-        .split('/')
-        .pop(),
     }),
   ],
   ...

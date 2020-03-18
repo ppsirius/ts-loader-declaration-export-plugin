@@ -3,7 +3,6 @@ import IOptions from "./IOptions";
 declare class DeclarationExportPlugin {
     modulePath: string;
     output: string;
-    folderName: string;
     constructor(options: IOptions);
     static allDeclarationsName(assets: object): string[];
     static filterDeclarationsName(declarations: string[], modulePath: string): string[];
