@@ -1,6 +1,6 @@
 {
   "name": "ts-loader-declaration-export-plugin",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -8,6 +8,12 @@
     "type": "git",
     "url": "https://github.com/ppsirius/ts-loader-declaration-export-plugin"
   },
+  "keywords": [
+    "typescript",
+    "declaration",
+    "export",
+    "ts-loader"
+  ],
   "scripts": {
     "dev": "babel --watch src --out-dir dist --extensions '.ts,.tsx'",
     "type-check": "tsc --noEmit",
