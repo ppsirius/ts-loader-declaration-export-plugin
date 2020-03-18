@@ -1,6 +1,5 @@
 import { Compiler } from "webpack";
 import IOptions from "./IOptions";
-import path from "path";
 
 class DeclarationExportPlugin {
   modulePath: string;

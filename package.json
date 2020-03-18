@@ -2,6 +2,10 @@
   "name": "ts-loader-declaration-export-plugin",
   "version": "0.0.1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ppsirius/ts-loader-declaration-export-plugin"
+  },
   "scripts": {
     "dev": "babel --watch src --out-dir dist --extensions '.ts,.tsx'",
     "type-check": "tsc --noEmit",
@@ -9,7 +13,8 @@
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
-    "test": "jest"
+    "test": "jest",
+    "publish": "npm run test && npm run build && npm publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
