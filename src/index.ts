@@ -4,15 +4,13 @@ import IOptions from "./IOptions";
 class DeclarationExportPlugin {
   modulePath: string;
   output: string;
-  folderName: string;
 
   constructor(options: IOptions) {
-    if (!options.modulePath || !options.output || !options.folderName) {
+    if (!options.modulePath || !options.output) {
       throw new Error(`Please set correct options object, check docs`);
     }
     this.modulePath = options.modulePath;
     this.output = options.output;
-    this.folderName = options.folderName;
   }
 
   static allDeclarationsName(assets: object): string[] {
@@ -26,9 +24,7 @@ class DeclarationExportPlugin {
     modulePath: string
   ): string[] {
     return declarations.filter(declaration => {
-      console.log(declaration, " declaration");
       if (declaration.indexOf(`${modulePath}`) !== -1) {
-        console.log(declaration, " declaration if");
         return declaration;
       }
     });
@@ -81,8 +77,6 @@ class DeclarationExportPlugin {
           ...compilation.assets,
           ...generatedDeclarations[0]
         };
-        console.log(...generatedDeclarations, " decration assets ");
-        console.log(compilation.assets, " compilation.assets");
 
         callback();
       }
