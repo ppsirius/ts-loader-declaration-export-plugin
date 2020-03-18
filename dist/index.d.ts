@@ -6,8 +6,7 @@ declare class DeclarationExportPlugin {
     folderName: string;
     constructor(options: IOptions);
     static allDeclarationsName(assets: object): string[];
-    static filterDeclarationsName(declarations: string[], folderName: string, modulePath: string): string[];
-    generateAssetPath: (path: string) => string;
+    static filterDeclarationsName(declarations: string[], modulePath: string): string[];
     filterDeclarationsAssets: (allAssets: {
         [key: string]: string;
     }, filteredDeclarations: string[]) => object[];

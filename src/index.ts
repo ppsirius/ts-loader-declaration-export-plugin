@@ -23,23 +23,16 @@ class DeclarationExportPlugin {
 
   static filterDeclarationsName(
     declarations: string[],
-    folderName: string,
     modulePath: string
   ): string[] {
     return declarations.filter(declaration => {
       console.log(declaration, " declaration");
-      console.log(`${folderName}/${modulePath}`);
-      if (declaration.indexOf(`${folderName}/${modulePath}`) !== -1) {
+      if (declaration.indexOf(`${modulePath}`) !== -1) {
         console.log(declaration, " declaration if");
         return declaration;
       }
     });
   }
-
-  generateAssetPath = (path: string): string => {
-    // const url = path.split("/");
-    return `/'${this.output}`;
-  };
 
   filterDeclarationsAssets = (
     allAssets: { [key: string]: string },
@@ -54,9 +47,8 @@ class DeclarationExportPlugin {
         }
       })
       .map(fileName => {
-        this.generateAssetPath(fileName);
         return {
-          [this.generateAssetPath(fileName)]: allAssets[fileName]
+          [this.output]: allAssets[fileName]
         };
       });
 
@@ -75,8 +67,7 @@ class DeclarationExportPlugin {
       (compilation, callback) => {
         const filteredDeclarations = DeclarationExportPlugin.filterDeclarationsName(
           DeclarationExportPlugin.allDeclarationsName(compilation.assets),
-          this.folderName,
-          this.folderName
+          this.modulePath
         );
 
         const generatedDeclarations = this.filterDeclarationsAssets(

@@ -11,11 +11,11 @@ This is a small webpack plugin to export only declaration files you choose. It's
 ## Add plugin
 
 ```sh
-yarn add ts-loader-declaration-export-plugin
+yarn add -D ts-loader-declaration-export-plugin
 ```
 
 ```sh
-npm install ts-loader-declaration-export-plugin
+npm install -D ts-loader-declaration-export-plugin
 ```
 
 ## Add plugin to webpack
